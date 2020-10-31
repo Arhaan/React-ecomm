@@ -10,6 +10,9 @@ class User(AbstractUser):
 
 
 def get_username(profile):
+    """
+    Method needed for AutoSlugField because we can't use lambda functions
+    """
     return profile.user.username
 
 
