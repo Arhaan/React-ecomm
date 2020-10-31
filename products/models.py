@@ -15,6 +15,9 @@ class Product(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     slug = AutoSlugField(populate_from='title', unique=True)
 
+    def __unicode__(self):
+        return f'{self.id}'
+
 
 class Review(models.Model):
     class Stars(models.IntegerChoices):
@@ -40,7 +43,7 @@ class Order(models.Model):
     ]
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.PROTECT)  # Do not allow deleting of any product
-    status = models.CharField(max_length=5, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=5, choices=STATUS_CHOICES, default='SHIP')
     quantity = models.IntegerField(validators=[MinValueValidator(1)], default=1)
 
 # TODO: Add image functionality
