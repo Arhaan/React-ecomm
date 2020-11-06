@@ -17,7 +17,7 @@ class ProductViewSet(viewsets.ModelViewSet):
         serializer.save(seller=self.request.user)
 
     @action(detail=True)
-    def get_reviews(self):
+    def get_reviews(self, request, pk=None):
         """
         Get all reviews for a Product
         """
