@@ -1,33 +1,34 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Container} from "react-bootstrap";
-import Card from "react-bootstrap/Card";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-const Home = () => {
+import {Route, Switch, useRouteMatch} from "react-router-dom";
+import Product from "./Product";
+import ProductList from "./ProductList";
+const API_URL = "http://localhost:8000"
+const Home = (props) => {
+    //console.log(process.env)
     const [products, setProducts] = useState([])
+    const {url, path} = useRouteMatch();
+    //console.log(`Yay Path = ${path}`)
     useEffect(()=>
         {
-            axios.get("/api/products/")
+            axios.get(`${API_URL}/api/products/`)
                 .then(result => {setProducts(result.data)})
         },
         []
     )
-  return (
-      <div>
-            <Container>
-                {products.map(product =>
-                      <Card style={{margin: '25px'}} key={product.id}>
-                          <Card.Body>
-                              <Card.Title>{product.title}</Card.Title>
-                              <Card.Subtitle className="text-muted mb-2">$ {product.cost}</Card.Subtitle>
 
-                          </Card.Body>
-                      </Card>
-                )}
-            </Container>
-      </div>
-  );
+        return (
+            <div>
+                <Container>
+                    <Route path={`${url}/:prod_id`}><Product data={products}/></Route>
+                    <Route exact path={`${url}`}>
+                        <ProductList products={products}/>
+                    </Route>
+                </Container>
+            </div>
+        );
 }
 
 export default Home;
