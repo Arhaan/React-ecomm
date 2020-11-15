@@ -1,9 +1,9 @@
-import { React, useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import React from 'react';
+import useParams from "react-router-dom";
 import Spinner from "react-bootstrap/cjs/Spinner";
 import Row from "react-bootstrap/cjs/Row";
 import Button from "react-bootstrap/cjs/Button";
-import { Redirect, useHistory } from "react-router-dom"
+import useHistory from "react-router-dom"
 import axios from 'axios';
 
 const BuyButton = ({prodId}) => {
