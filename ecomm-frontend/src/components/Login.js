@@ -1,5 +1,6 @@
-import {React, useState} from "react";
-import Form from 'react-bootstrap/Form'
+import {React, useState,} from "react";
+import { useHistory } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/cjs/Button";
 import axios from "axios";
 import Alert from "react-bootstrap/cjs/Alert";
@@ -18,6 +19,7 @@ const LoginForm = (props) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [failed, setFailed] = useState(false)
+    const history = useHistory()
     const handleFormSubmit = (event) => {
         event.preventDefault()
         setFailed(false)
@@ -27,6 +29,7 @@ const LoginForm = (props) => {
         })
             .then((response) => {
                 localStorage.setItem('auth_token', response.data.token)
+                history.push('/home')
                 //console.log(response)
             })
             .catch((error) => {

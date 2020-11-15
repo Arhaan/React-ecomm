@@ -21,5 +21,5 @@ urlpatterns = [
     path('api/', include('products.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('users.urls')),
-    path('api-auth-token/', auth_token_views.obtain_auth_token),
+    path('api-auth-token/', auth_token_views.obtain_auth_token, name="auth-token"),
 ]

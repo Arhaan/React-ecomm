@@ -4,27 +4,29 @@ import Spinner from "react-bootstrap/cjs/Spinner";
 import Row from "react-bootstrap/cjs/Row";
 import Button from "react-bootstrap/cjs/Button";
 import { Redirect, useHistory } from "react-router-dom"
+import axios from 'axios';
 
-const BuyButton = (props) => {
-    const [handleClick, setHandleClick] = useState(() => () => {console.log("Now Working")})
+const BuyButton = ({prodId}) => {
     const history = useHistory()
-    useEffect(()=>{
-        console.log("Effect")
+
+    const handleClick = ()=> {
         const token = localStorage.getItem("auth_token")
-        console.log(token)
-        if (!token){
+        //console.log(token)
+        if (!token) {
             console.log("Token not found")
-            setHandleClick(() => () => {
-                console.log("Redirect")
-                history.push('/login')
+            console.log("Redirect")
+            history.push('/login')
+        } else {
+            console.log("Place order")
+            axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/orders/`, {'product': prodId}, {
+                headers: {
+                    'Authorization': `Token ${token}`
+                }
+            }).then((response) => {
+                console.log(response)
             })
         }
-        else {
-            setHandleClick(() => {
-                console.log("Place order")
-            })
-        }
-    }, [])
+    }
 
     return(
         <Button variant="outline-success" onClick={handleClick}>
@@ -49,7 +51,7 @@ const Product = ({ data }) => {
                         {product.description}
                     </p>
                 </Row>
-                <BuyButton/>
+                <BuyButton prodId={productId}/>
             </div>
         );
     }
