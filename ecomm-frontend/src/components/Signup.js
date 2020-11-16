@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/cjs/Button";
 import axios from "axios";
+import {useHistory} from 'react-router-dom';
 const Signup = (props) => {
     const [username, setUsername] = useState("")
     const [firstName, setFirstName] = useState("")
@@ -11,7 +12,7 @@ const Signup = (props) => {
     const [pass, setPass] = useState("")
     const [confirmPass, setConfirmPass] = useState("")
     const [email, setEmail] = useState("")
-
+    const history = useHistory()
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log("Submit")
@@ -34,6 +35,9 @@ const Signup = (props) => {
                     .then((response) => {
                         localStorage.setItem('auth_token', response.data.token)
                         //console.log(response)
+                    })
+                    .then(() => {
+                        history.push('/home')
                     })
             })
                 .catch((error)=>{

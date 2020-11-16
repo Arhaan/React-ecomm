@@ -22,7 +22,7 @@ const BuyButton = ({prodId}) => {
                     'Authorization': `Token ${token}`
                 }
             }).then((response) => {
-                console.log(response)
+                history.push('/orders')
             })
         }
     }

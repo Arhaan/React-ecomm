@@ -8,6 +8,7 @@ import LoginForm from "./components/Login";
 import Logout from "./components/Logout";
 import Signup from "./components/Signup";
 import Container from "react-bootstrap/cjs/Container";
+import OrdersView from "./components/Orders";
 function App() {
     const { pathname } = useLocation();
     return(
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/login"><LoginForm/></Route>
                 <Route path="/logout"><Logout/></Route>
                 <Route path="/signup"><Signup/></Route>
+                <Route path="/orders"><OrdersView/></Route>
             </Switch>
             </Container>
         </div>
