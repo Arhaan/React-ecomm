@@ -7,12 +7,20 @@ from django.core.validators import MinValueValidator
 
 
 class Product(models.Model):
+    CATEGORY_CHOICES = [
+        ('GEN', 'General'),
+        ('BOOKS', 'Books'),
+        ('BEAUTY', 'Beauty'),
+        ('CLOTH', 'Clothing'),
+        ('MUSIC', 'Musical Instruments'),
+    ]
     seller = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(max_length=1000, null=False)
     description = models.TextField(null=False)
     cost = models.DecimalField(max_digits=8, decimal_places=2)  # In dollars. TODO: Add django-money
     discounted_cost = models.DecimalField(max_digits=8, decimal_places=2, default=cost)
     date_added = models.DateTimeField(auto_now_add=True)
+    category = models.CharField(max_length=100, choices=CATEGORY_CHOICES, default='GEN')
     slug = AutoSlugField(populate_from='title', unique=True)
 
     def __unicode__(self):
