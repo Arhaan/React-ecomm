@@ -36,7 +36,6 @@ class AuthTests(APITestCase):
                                         'password': 'Hello',
                                         'confirm-pass': 'Hello',
                                     })
-        breakpoint()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_signup_fails_when_passwords_dont_match(self):

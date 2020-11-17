@@ -12,7 +12,7 @@ from rest_framework.decorators import action
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = UserProfileSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly, UserPermissions]
+    permission_classes = [UserPermissions]
 
     def create(self, request, *args, **kwargs):
         serializer = UserProfileSerializer(data=request.data)
