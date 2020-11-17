@@ -70,3 +70,10 @@ class AuthTests(APITestCase):
         self.client.login(username="TestUser", password="TestPass")
         response = self.client.get(reverse("product:users-list"))
         self.assertContains(response, 'Test')
+    def test_unlogged_in_user_cannot_get_self(self):
+        """
+         On going to user-list unauthenticated user should get 405
+        """
+        self.client.logout()
+        response = self.client.get(reverse("product:users-list"))
+        self.assertEqual(response.status_code, 405)
