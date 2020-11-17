@@ -31,15 +31,14 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, *args, **kwargs):
         try:
-            user = get_user_model().objects.get(pk=kwargs['pk'])
+            user = get_user_model().objects.get(id=kwargs['pk'])
         except get_user_model().DoesNotExist:
             return Response({"detail": "User not found"}, status=status.HTTP_404_NOT_FOUND)
         serializer = UserProfileSerializer(
             user
         )
-        breakpoint()
-        serializer.data
-        return serializer.data
+        # breakpoint()
+        return Response(serializer.data)
 
 
 class UpdatePasswordView(generics.UpdateAPIView):
