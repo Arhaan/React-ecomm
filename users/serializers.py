@@ -9,8 +9,8 @@ class UserProfileSerializer(serializers.Serializer):
     email = serializers.EmailField()
     first_name = serializers.CharField()
     last_name = serializers.CharField()
-    address = serializers.CharField()
-    pin_code = serializers.IntegerField()
+    address = serializers.CharField(source='profile.address')
+    pin_code = serializers.IntegerField(source='profile.pin_code')
 
     def create(self, validated_data):
         user = get_user_model().objects.create(
@@ -19,15 +19,15 @@ class UserProfileSerializer(serializers.Serializer):
            last_name=validated_data['last_name'],
            email=validated_data['email'],
         )
-        user.profile.address = validated_data['address']
-        user.profile.pin_code = validated_data['pin_code']
+        user.profile.address = validated_data['profile']['address']
+        user.profile.pin_code = validated_data['profile']['pin_code']
         user.set_password(validated_data['password'])
         user.save()
         return user
 
     # class Meta:
     #     model = get_user_model()
-    #     fields = ('id', 'username', 'first_name', 'last_name', 'profile', 'email')
+    #     fields = ('id', 'username', 'first_name', 'last_name', 'address', 'pin_code', 'email')
 
 
 # noinspection PyAbstractClass
