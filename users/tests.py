@@ -27,7 +27,7 @@ class AuthTests(APITestCase):
         """
         response = self.client.post(reverse('product:users-list'),
                                     {
-                                        'username': 'Arhaan',
+                                        'username': 'Arhan',
                                         'email': 'a@a.com',
                                         'address': 'abc',
                                         'pin_code': 2,
@@ -36,6 +36,7 @@ class AuthTests(APITestCase):
                                         'password': 'Hello',
                                         'confirm-pass': 'Hello',
                                     })
+        breakpoint()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_signup_fails_when_passwords_dont_match(self):
@@ -61,3 +62,12 @@ class AuthTests(APITestCase):
         response = self.client.get(reverse("product:users-detail", args={user.id}))
 
         self.assertContains(response, "TestUser")
+
+    def test_logged_in_user_can_get_self(self):
+        """
+         On going to user-list logged in user should find their profile
+        """
+        user = create_user()
+        self.client.login(username="TestUser", password="TestPass")
+        response = self.client.get(reverse("product:users-list"))
+        self.assertContains(response, 'Test')

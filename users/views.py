@@ -6,15 +6,13 @@ from .permissions import UserPermissions, ChangePasswordPermission
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework import generics, status
 from rest_framework.response import Response
+from rest_framework.decorators import action
 # Create your views here.
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = UserProfileSerializer
-    # permission_classes = [IsAuthenticatedOrReadOnly, UserPermissions]
-
-    def get_queryset(self):
-        return get_user_model().objects.filter(pk=self.request.user.pk)
+    permission_classes = [IsAuthenticatedOrReadOnly, UserPermissions]
 
     def create(self, request, *args, **kwargs):
         serializer = UserProfileSerializer(data=request.data)
@@ -27,7 +25,11 @@ class UserProfileViewSet(viewsets.ModelViewSet):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def list(self, request, *args, **kwargs):
-        return Response({"list": "Viewing entire user list is not allowed"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        # Return present user if logged in else return error
+        if self.request.user.is_authenticated:
+            serializer = UserProfileSerializer(self.request.user)
+            return Response(serializer.data)
+        return Response({"list": "User is not logged in"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def retrieve(self, request, *args, **kwargs):
         try:
