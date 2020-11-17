@@ -44,7 +44,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, OrderPermissions]
 
     def get_queryset(self):
-        return Order.objects.filter(user=self.request.user)
+        return Order.objects.filter(user=self.request.user).order_by('-date_ordered')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user, product=Product.objects.get(id=self.request.data['product']))

@@ -27,6 +27,7 @@ class Product(models.Model):
         return f'{self.id}'
 
 
+
 class Review(models.Model):
     class Stars(models.IntegerChoices):
         BAD = 1
@@ -53,5 +54,5 @@ class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.PROTECT)  # Do not allow deleting of any product
     status = models.CharField(max_length=5, choices=STATUS_CHOICES, default='SHIP')
     quantity = models.IntegerField(validators=[MinValueValidator(1)], default=1)
-
+    date_ordered = models.DateTimeField(auto_now_add=True)
 # TODO: Add image functionality
