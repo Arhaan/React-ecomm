@@ -10,28 +10,46 @@ import Signup from "./components/Signup";
 import Container from "react-bootstrap/cjs/Container";
 import OrdersView from "./components/Orders";
 import ProfileView from "./components/ProfileView";
-
+import Nav from "react-bootstrap/cjs/Nav";
 const CustomNavbar = ({user}) => {
 
     if(user){
         return(
-            <Navbar bg="dark">
-                <Navbar.Brand href="/home">Ecommerce</Navbar.Brand>
-                <Navbar.Text><Link to="/profile">{user}</Link></Navbar.Text>
-                <Navbar.Text><Link to="/logout">Logout </Link></Navbar.Text>
+            <Navbar>
+                <Nav className={"mr-auto"}>
+                    <Nav.Link><Navbar.Brand><Link to={"/home"}>Ecommerce</Link></Navbar.Brand></Nav.Link>
+                </Nav>
+                <Nav className={"justify-content-end"}>
+                    <Nav.Link><Navbar.Text><Link to="/profile">{user}</Link></Navbar.Text></Nav.Link>
+                    <Nav.Link><Navbar.Text><Link to="/logout">Logout </Link></Navbar.Text></Nav.Link>
+                </Nav>
             </Navbar>
         )
     }
     else{
         return(
-            <Navbar bg="dark">
-                <Navbar.Brand href="/home">Ecommerce</Navbar.Brand>
-                <Navbar.Text><Link to="/login">Login</Link></Navbar.Text>
-                <Navbar.Text><Link to="/signup">Signup</Link></Navbar.Text>
+            <Navbar>
+                <Nav className={"mr-auto"}>
+                    <Navbar.Brand><Link to={"/home"}>Ecommerce</Link></Navbar.Brand>
+                </Nav>
+                <Nav className={"justify-content-end"}>
+                    <Nav.Link><Navbar.Text><Link to="/login">Login</Link></Navbar.Text></Nav.Link>
+                    <Nav.Link><Navbar.Text><Link to="/signup">Signup</Link></Navbar.Text></Nav.Link>
+                </Nav>
             </Navbar>
         )
     }
 
+}
+
+const Footer = () => {
+    return(
+        <div className={"footer"}>
+            <Container>
+            <p>Made by <a target="_blank" href="https://github.com/arhaan" rel="noopener">Arhaan Ahmad</a></p>
+            </Container>
+        </div>
+    )
 }
 function App() {
     const { pathname } = useLocation();
@@ -40,9 +58,9 @@ function App() {
         setUserName(username)
     }
     return(
-        <div>
-            <CustomNavbar user={Username}/>
-            <Container>
+        <div className={"App"}>
+            <CustomNavbar user={Username} className={"navbar"}/>
+            <Container >
 
             <Switch>
                 <Redirect from="/:url*(/+)" to={pathname.slice(0,-1)}/>
@@ -53,6 +71,7 @@ function App() {
                 <Route path="/orders"><OrdersView/></Route>
                 <Route path="/profile"><ProfileView/></Route>
             </Switch>
+            <Footer/>
             </Container>
         </div>
 
