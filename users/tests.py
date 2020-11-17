@@ -54,3 +54,10 @@ class AuthTests(APITestCase):
                                         'confirm-pass': 'abc',
                                     })
         self.assertNotEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_user_can_be_retrieved(self):
+        user = create_user()
+
+        response = self.client.get(reverse("product:users-detail", args={user.id}))
+
+        self.assertContains(response, "TestUser")
