@@ -1,5 +1,5 @@
 import './App.css';
-import { React, useContext, createContext } from "react";
+import {React, useContext, createContext, useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./components/home";
 import { Route, Switch, Redirect, useLocation, Link} from "react-router-dom";
@@ -11,14 +11,13 @@ import Container from "react-bootstrap/cjs/Container";
 import OrdersView from "./components/Orders";
 import ProfileView from "./components/ProfileView";
 
-const UserContext = createContext(localStorage.getItem("user"))
-const CustomNavbar = () => {
-    const user = useContext(UserContext)
+const CustomNavbar = ({user}) => {
+
     if(user){
         return(
             <Navbar bg="dark">
                 <Navbar.Brand href="/home">Ecommerce</Navbar.Brand>
-                <Navbar.Text><Link to="/profile">{user.username}</Link></Navbar.Text>
+                <Navbar.Text><Link to="/profile">{user}</Link></Navbar.Text>
                 <Navbar.Text><Link to="/logout">Logout </Link></Navbar.Text>
             </Navbar>
         )
@@ -36,20 +35,20 @@ const CustomNavbar = () => {
 }
 function App() {
     const { pathname } = useLocation();
-
+    const [Username, setUserName] = useState(localStorage.getItem("user"))
+    const handleUserChange = (username) => {
+        setUserName(username)
+    }
     return(
         <div>
             <Container>
-            <UserContext.Provider>
-                <CustomNavbar/>
-            </UserContext.Provider>
-
+            <CustomNavbar user={Username}/>
             <Switch>
                 <Redirect from="/:url*(/+)" to={pathname.slice(0,-1)}/>
                 <Route path="/home"><Home/></Route>
-                <Route path="/login"><LoginForm/></Route>
+                <Route path="/login"><LoginForm handleUserChange={handleUserChange}/></Route>
                 <Route path="/logout"><Logout/></Route>
-                <Route path="/signup"><Signup/></Route>
+                <Route path="/signup"><Signup handleUserChange={handleUserChange}/></Route>
                 <Route path="/orders"><OrdersView/></Route>
                 <Route path="/profile"><ProfileView/></Route>
             </Switch>

@@ -1,7 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 const Logout = () => {
-    localStorage.removeItem("auth_token")
+    useEffect(() => {
+        localStorage.removeItem("auth_token")
+        localStorage.removeItem("user")
+    }, [])
+
     return(
         <div>
             You have been logged out.

@@ -34,6 +34,7 @@ const Signup = (props) => {
                 })
                     .then((response) => {
                         localStorage.setItem('auth_token', response.data.token)
+                        props.handleUserChange(username)
                         //console.log(response)
                     })
                     .then(() => {

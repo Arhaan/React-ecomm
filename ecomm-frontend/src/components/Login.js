@@ -28,10 +28,25 @@ const LoginForm = (props) => {
             'password': password,
         })
             .then((response) => {
-                localStorage.setItem('auth_token', response.data.token)
+                let token = response.data.token
+                localStorage.setItem('auth_token', token)
+                console.log(response.data)
+                axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/users/`, {headers:{
+                        "Authorization": `Token ${token}`
+                    }})
+                        .then((response)=>{
+                            // Add username to localstorage as well as state
+                            localStorage.setItem("user", response.data.username)
+                            props.handleUserChange(response.data.username)
+                        })
                 history.push('/home')
                 //console.log(response)
             })
+            .then(
+                () => {
+
+                }
+            )
             .catch((error) => {
                 //console.log(error.message)
                 setFailed(true)
