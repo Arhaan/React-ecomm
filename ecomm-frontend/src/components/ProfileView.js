@@ -9,7 +9,7 @@ const ProfileView = (props) => {
     }
     const [fullProfile, setFullProfile] = useState({})
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/users/`)
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/users/`)
             .then((response)=> {
                     setFullProfile(response.data)
                 }
