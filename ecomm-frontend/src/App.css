@@ -1,14 +1,16 @@
+
 .App {
-  background-color: #0f0e17;
+ background-color: #0f0e17;
   height: 100%;
   width: 100%;
   position: absolute;
   color: #a7a9be;
+    overflow-y: scroll;
+    /* So that this div works even when we need to scroll down    */
 }
 
 .footer {
   position: fixed;
-  margin: auto;
   background-color: #232946;
   bottom: 0;
   left: 0;

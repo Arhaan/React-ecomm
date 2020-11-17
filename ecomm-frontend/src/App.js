@@ -60,7 +60,7 @@ function App() {
     return(
         <div className={"App"}>
             <CustomNavbar user={Username} className={"navbar"}/>
-            <Container >
+            <Container>
 
             <Switch>
                 <Redirect from="/:url*(/+)" to={pathname.slice(0,-1)}/>
