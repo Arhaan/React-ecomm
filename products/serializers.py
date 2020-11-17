@@ -28,6 +28,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     # )
 
     reviewer = serializers.SerializerMethodField('get_reviewer_id')
+    product = ProductSerializer()
 
     def get_reviewer_id(self, obj):
         return obj.reviewer.id
@@ -44,6 +45,7 @@ class OrderSerializer(serializers.ModelSerializer):
     #     queryset=get_user_model().objects.all(),
     # )
     user = serializers.SerializerMethodField('get_user_id')
+    product = ProductSerializer(many=False, read_only=True)
 
     def get_user_id(self, obj):
         return obj.user.id
