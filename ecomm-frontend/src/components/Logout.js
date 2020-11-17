@@ -9,7 +9,7 @@ const Logout = (props) => {
 
     return(
         <div>
-            You have been logged out.
+            <h1>You have been logged out.</h1>
         </div>
     )
 }

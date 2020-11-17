@@ -18,7 +18,8 @@ const OrderCard = ({order}) => {
     console.log(order.product.title)
     return(
         <div>
-            <Card>
+
+            <Card style={{margin: '25px'}}>
                 <Card.Header>{getStatusString(order.status)}</Card.Header>
                 <Card.Title><Link to={`/home/${order.product.id}`}>{order.product.title}</Link></Card.Title>
             </Card>
@@ -46,6 +47,7 @@ const OrdersView = () => {
             }, [token])
     return (
         <div>
+            <h1>Your Orders</h1>
             {orders.map(order => <OrderCard key={order.id} order={order}/>)}
         </div>
     )
