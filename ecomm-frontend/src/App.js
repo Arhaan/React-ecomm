@@ -48,7 +48,7 @@ function App() {
                 <Redirect from="/:url*(/+)" to={pathname.slice(0,-1)}/>
                 <Route path="/home"><Home/></Route>
                 <Route path="/login"><LoginForm handleUserChange={handleUserChange}/></Route>
-                <Route path="/logout"><Logout/></Route>
+                <Route path="/logout"><Logout handleUserChange={handleUserChange}/></Route>
                 <Route path="/signup"><Signup handleUserChange={handleUserChange}/></Route>
                 <Route path="/orders"><OrdersView/></Route>
                 <Route path="/profile"><ProfileView/></Route>
