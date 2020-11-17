@@ -17,7 +17,7 @@ const BuyButton = ({prodId}) => {
             history.push('/login')
         } else {
             console.log("Place order")
-            axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/orders/`, {'product': prodId}, {
+            axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/orders/`, {"product": prodId}, {
                 headers: {
                     'Authorization': `Token ${token}`
                 }

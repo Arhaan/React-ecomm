@@ -1,12 +1,27 @@
 import {React, useEffect, useState} from "react";
-import { useHistory } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import axios from "axios";
 import Card from "react-bootstrap/cjs/Card";
 
+const getStatusString = (code) => {
+    switch (code){
+        case 'SHIP':
+            return 'Preparing To Ship'
+        case 'DISP':
+            return 'Dispatched'
+        case 'DELI':
+            return 'Delivered'
+
+    }
+}
 const OrderCard = ({order}) => {
+    console.log(order.product.title)
     return(
         <div>
-            {order.product}
+            <Card>
+                <Card.Header>{getStatusString(order.status)}</Card.Header>
+                <Card.Title><Link to={`/home/${order.product.id}`}>{order.product.title}</Link></Card.Title>
+            </Card>
         </div>
     )
 }
@@ -26,18 +41,12 @@ const OrdersView = () => {
                     }
                 })
                     .then((response) => {
-                        console.log(response.data)
                         setOrders(response.data)
-
-                        console.log("Response data is", response.data.type)
-                        console.log(orders)
                     })
-
             }, [token])
     return (
         <div>
-            {orders.map(singleorder => <OrderCard key={singleorder.id} order={singleorder}/>)}
-
+            {orders.map(order => <OrderCard key={order.id} order={order}/>)}
         </div>
     )
 
