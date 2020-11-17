@@ -9,7 +9,9 @@ const ProfileView = (props) => {
     }
     const [fullProfile, setFullProfile] = useState({})
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/users/`)
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/users/`, {headers:{
+                        "Authorization": `Token ${localStorage.getItem("auth_token")}`
+                    }})
             .then((response)=> {
                     setFullProfile(response.data)
                 }
