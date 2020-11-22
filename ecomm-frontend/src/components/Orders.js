@@ -20,7 +20,7 @@ const OrderCard = ({order}) => {
 
             <Card style={{margin: '25px'}}>
                 <Card.Header>{getStatusString(order.status)}</Card.Header>
-                <Card.Title><Link to={`/home/${order.product.id}`}>{order.product.title}</Link></Card.Title>
+                <Card.Title style={{paddingLeft:'10px'}}><Link to={`/home/${order.product.id}`}>{order.product.title}</Link></Card.Title>
             </Card>
         </div>
     )

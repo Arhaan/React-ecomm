@@ -3,13 +3,14 @@ import Nav from "react-bootstrap/cjs/Nav";
 import {Link} from "react-router-dom";
 import SearchBar from "./SearchBar";
 import {React} from "react";
+import '../App.css';
 
 const CustomNavbar = ({user}) => {
     console.log(user)
     if(user){
         return(
-            <Navbar>
-                <Nav className>
+            <Navbar expand={"lg"} sticky={"top"} className={"custom-navbar"}>
+                <Nav>
                     <Navbar.Brand><Link to={"/home/list"}>Moce</Link></Navbar.Brand>
                 </Nav>
                 <Nav className={"mr-auto"}>

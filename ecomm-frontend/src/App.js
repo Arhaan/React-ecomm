@@ -31,7 +31,7 @@ function App() {
     }
     return(
         <div className={"App"}>
-            <CustomNavbar user={Username} className={"navbar"}/>
+            <CustomNavbar user={Username}/>
             <Container>
             <Switch>
                 <Redirect from="/:url*(/+)" to={pathname.slice(0,-1)}/>
