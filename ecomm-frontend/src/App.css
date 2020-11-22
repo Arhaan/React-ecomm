@@ -29,21 +29,22 @@
   text-decoration: None;
 }
 
-.navbar {
+.custom-navbar {
+  position: fixed;
   background-color: #232946;
   box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
-.navbar a{
+.custom-navbar a{
   color: #fffffe;
 }
 
-.navbar a:hover{
+.custom-navbar a:hover{
   color: #ffffee;
   text-decoration: none;
   transform: translate(0.5px, -0.5px);
 }
 
-.navbar-text{
+.custom-navbar-text{
   color: #fffffe;
 }
 
