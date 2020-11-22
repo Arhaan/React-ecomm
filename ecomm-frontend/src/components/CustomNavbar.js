@@ -10,9 +10,9 @@ const CustomNavbar = ({user}) => {
         return(
             <Navbar>
                 <Nav className>
-                    <Navbar.Brand><Link to={"/home/list"}>Ecommerce</Link></Navbar.Brand>
+                    <Navbar.Brand><Link to={"/home/list"}>Moce</Link></Navbar.Brand>
                 </Nav>
-                <Nav className={"justify-content-center mr-auto"}>
+                <Nav className={"mr-auto"}>
                     <SearchBar/>
                 </Nav>
                 <Nav className={"justify-content-end"}>
@@ -26,7 +26,10 @@ const CustomNavbar = ({user}) => {
         return(
             <Navbar>
                 <Nav className={"mr-auto"}>
-                    <Navbar.Brand><Link to={"/home"}>Ecommerce</Link></Navbar.Brand>
+                    <Navbar.Brand><Link to={"/home"}>Moce</Link></Navbar.Brand>
+                </Nav>
+                <Nav className={"justify-content-center mr-auto"}>
+                    <SearchBar/>
                 </Nav>
                 <Nav className={"justify-content-end"}>
                     <Nav.Link><Link to="/login">Login</Link></Nav.Link>

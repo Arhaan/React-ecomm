@@ -25,7 +25,7 @@ const SearchBar = () => {
     ]
     return (
         <Form inline>
-            <Dropdown>
+            <Dropdown class={"mr-1"}>
                 <Dropdown.Toggle variant={"secondary"}>
                     {category[1]}
                 </Dropdown.Toggle>
@@ -38,7 +38,9 @@ const SearchBar = () => {
             </Dropdown>
             <Form.Control
                 placeholder="Search"
-                onChange={handleQueryChange}/>
+                onChange={handleQueryChange}
+                className={"mr-1"}
+            />
             <Button type="submit" onClick={handleSearchClick}>
                 Search
             </Button>
