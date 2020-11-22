@@ -13,7 +13,8 @@ const CustomNavbar = ({user}) => {
                 <Nav>
                     <Navbar.Brand><Link to={"/home/list"}>Moce</Link></Navbar.Brand>
                 </Nav>
-                <Nav className={"mr-auto"}>
+
+                <Nav className={"mr-auto justify-content-end"}>
                     <SearchBar/>
                 </Nav>
                 <Nav className={"justify-content-end"}>

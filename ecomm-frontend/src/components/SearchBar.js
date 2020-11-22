@@ -24,6 +24,7 @@ const SearchBar = () => {
         ['MUSIC', 'Musical Instruments'],
     ]
     return (
+
         <Form inline>
             <Dropdown class={"mr-1"}>
                 <Dropdown.Toggle variant={"secondary"}>
