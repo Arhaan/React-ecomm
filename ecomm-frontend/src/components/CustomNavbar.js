@@ -13,8 +13,7 @@ const CustomNavbar = ({user}) => {
                 <Nav>
                     <Navbar.Brand><Link to={"/home/list"}>Moce</Link></Navbar.Brand>
                 </Nav>
-
-                <Nav className={"mr-auto justify-content-end"}>
+                <Nav className={"justify-content-center mr-auto"}>
                     <SearchBar/>
                 </Nav>
                 <Nav className={"justify-content-end"}>
@@ -26,7 +25,7 @@ const CustomNavbar = ({user}) => {
     }
     else{
         return(
-            <Navbar>
+            <Navbar expand={"lg"} sticky={"top"} className={"custom-navbar"}>
                 <Nav className={"mr-auto"}>
                     <Navbar.Brand><Link to={"/home"}>Moce</Link></Navbar.Brand>
                 </Nav>
