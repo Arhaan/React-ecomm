@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Spinner from "react-bootstrap/cjs/Spinner";
 import Row from "react-bootstrap/cjs/Row";
 import Button from "react-bootstrap/cjs/Button";
@@ -38,18 +38,34 @@ const Product = ({ data }) => {
     const productId = useParams()["prod_id"];
     //console.log(`productId ${productId}`)
     const product = data.find(prod => prod.id === parseInt(productId));
+    const [seller, setSeller] = useState({"name": ""})
+    useEffect(
+        () => {
+            if(product){
+                axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/users/${product.seller}`)
+                    .then((response)=>setSeller(response.data))
+            }
+        }, [product]
+    )
+    console.log(product)
     //console.log(`product: ${product}`)
     if (product){
         return (
             <div>
-                <Row>
+
                     <h1>
                         {product.title}
                     </h1>
+                    <h5>
+                        ${product.cost}
+                    </h5>
+                    <h5>
+                        Seller: {seller.username}
+                    </h5>
+
                     <p>
                         {product.description}
                     </p>
-                </Row>
                 <BuyButton prodId={productId}/>
             </div>
         );
@@ -57,7 +73,7 @@ const Product = ({ data }) => {
     else if(data.length!==0){
         return(
             <div>
-                <h1>Oh ho. Not found.</h1>
+                <h1>We couldn't find that Product</h1>
             </div>
         );
     }
