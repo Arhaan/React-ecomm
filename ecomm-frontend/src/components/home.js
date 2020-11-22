@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Container, Form} from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Route, Switch, useRouteMatch, useHistory} from "react-router-dom";
+import {Route, Switch, useRouteMatch} from "react-router-dom";
 import Product from "./Product";
 import ProductList from "./ProductList";
-import Button from "react-bootstrap/cjs/Button";
-import Fuse from 'fuse.js'
 
 const Home = (props) => {
     //console.log(process.env)
