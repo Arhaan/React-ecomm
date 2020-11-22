@@ -7,7 +7,6 @@ import Product from "./Product";
 import ProductList from "./ProductList";
 import Button from "react-bootstrap/cjs/Button";
 import Fuse from 'fuse.js'
-const API_URL = "http://localhost:8000"
 
 const Home = (props) => {
     //console.log(process.env)
@@ -17,7 +16,7 @@ const Home = (props) => {
 
     useEffect(()=>
         {
-            axios.get(`${API_URL}/api/products/`)
+            axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/products/`)
                 .then(result => {
                     setProducts(result.data)
                 })
@@ -33,7 +32,10 @@ const Home = (props) => {
                         <Route path={`${url}/list/:category`}><ProductList products={products}/></Route>
                         <Route path={`${url}/list/`}><ProductList products={products}/></Route>
                         <Route path={`${url}/single/:prod_id`}><Product data={products}/></Route>
-                        <Route exact path={`${url}/list`}>
+                        <Route path={`${url}/list`}>
+                            <ProductList products={products}/>
+                        </Route>
+                        <Route path={`${url}/`}>
                             <ProductList products={products}/>
                         </Route>
                     </Switch>
