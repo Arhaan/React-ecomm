@@ -28,12 +28,3 @@ def create_order(product=None, user=None):
         user = create_user(username="Test2")
     order = Order.objects.create(product=product, user=user)
     return order
-
-
-class OrderTests(APITestCase):
-    def test_create_order_works(self):
-        user = create_user()
-        token = self.client.post(reverse('auth-token'), {'username': 'TestUser', 'password': 'TestPass'}).data.token
-        product = create_product(seller=user)
-
-        response = self.client.post('product:orders-list', {'user': user.id, 'product': product.id}, ) # not finished
