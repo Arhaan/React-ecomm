@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 import axios from 'axios';
+import Button from "react-bootstrap/cjs/Button";
 const ProfileView = (props) => {
     const user = localStorage.getItem("user")
     const history = useHistory()
@@ -23,7 +24,8 @@ const ProfileView = (props) => {
     }, [])
     return(
         <div>
-            {fullProfile.first_name}
+            <h1>{fullProfile.first_name} {fullProfile.last_name}</h1>
+            <Button onClick={() => history.push("/orders")}>Your Orders</Button>
         </div>
     )
 }
