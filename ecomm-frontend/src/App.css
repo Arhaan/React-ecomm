@@ -46,3 +46,7 @@
 .navbar-text{
   color: #fffffe;
 }
+
+.search-dropdown-items a{
+    color: black;
+}

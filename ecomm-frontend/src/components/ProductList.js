@@ -5,14 +5,23 @@ import React from "react";
 import Fuse from "fuse.js";
 
 
-const ProductList = ({products, hasQuery=false})=>{
+const ProductList = ({products})=>{
     const {url, path} = useRouteMatch();
-    const query = useParams()["query"]
-    //console.log("Query = ", query)
+    let query = useParams()["query"] || ""
+
+    const category = useParams()["category"]
+    //console.log(`Category: ${category}`)
+    //console.log(category)
     let productsToShow = products
-    if (hasQuery){
-        //console.log("Query = ", query)
-        const fuse = new Fuse(products, {
+    if(category !== "ALL"){
+        productsToShow = productsToShow.filter(product => {
+            //console.log(product.category === category)
+            return product.category === category})
+    }
+    console.log(productsToShow)
+    if (query){
+        console.log(`Query = ${query}`)
+        const fuse = new Fuse(productsToShow, {
             keys: [
                 'title',
                 'description',
@@ -21,8 +30,10 @@ const ProductList = ({products, hasQuery=false})=>{
         productsToShow = fuse.search(query).map(product => product.item)
         // Map to product.item because fuse returns in a different format
     }
+    console.log(productsToShow)
     return(
         <div>
+            {productsToShow.length<=0?<h1>Your Query Returned No Result</h1>:<></>}
                 {productsToShow.map(product =>
                       <Card style={{margin: '25px'}} key={product.id}>
                           <Card.Body>

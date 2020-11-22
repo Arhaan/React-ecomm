@@ -26,8 +26,8 @@ const CustomNavbar = ({user}) => {
                     <SearchBar/>
                 </Nav>
                 <Nav className={"justify-content-end"}>
-                    <Nav.Link><Navbar.Text><Link to="/profile">{user}</Link></Navbar.Text></Nav.Link>
-                    <Nav.Link><Navbar.Text><Link to="/logout">Logout </Link></Navbar.Text></Nav.Link>
+                    <Navbar.Text><Link to="/profile">{user}</Link></Navbar.Text>
+                    <Navbar.Text><Link to="/logout">Logout </Link></Navbar.Text>
                 </Nav>
             </Navbar>
         )

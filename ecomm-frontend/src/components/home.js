@@ -29,7 +29,8 @@ const Home = (props) => {
             <div>
                 <Container>
                     <Switch>
-                        <Route path={`${url}/list/search/:query`}><ProductList products={products} hasQuery={true}/></Route>
+                        <Route path={`${url}/list/:category/:query`}><ProductList products={products}/></Route>
+                        <Route path={`${url}/list/:category`}><ProductList products={products}/></Route>
                         <Route path={`${url}/single/:prod_id`}><Product data={products}/></Route>
                         <Route exact path={`${url}/list`}>
                             <ProductList products={products}/>
