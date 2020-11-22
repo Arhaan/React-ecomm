@@ -1,8 +1,8 @@
 import './App.css';
-import {React, useContext, createContext, useState} from "react";
+import {React, useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./components/home";
-import {Route, Switch, Redirect, useLocation, Link, useHistory} from "react-router-dom";
+import {Route, Switch, Redirect, useLocation, Link} from "react-router-dom";
 import Navbar from "react-bootstrap/cjs/Navbar";
 import LoginForm from "./components/Login";
 import Logout from "./components/Logout";
@@ -11,30 +11,9 @@ import Container from "react-bootstrap/cjs/Container";
 import OrdersView from "./components/Orders";
 import ProfileView from "./components/ProfileView";
 import Nav from "react-bootstrap/cjs/Nav";
-import {Form} from "react-bootstrap";
-import Button from "react-bootstrap/cjs/Button";
+import SearchBar from "./components/SearchBar";
 
-const SearchBar = () => {
-    const history = useHistory()
-    const [query, setQuery] = useState()
-    const handleQueryChange = (event) => {
-        setQuery(event.target.value)
-    }
-    const handleSearchClick = (event) => {
-        event.preventDefault()
-        history.push(`/home/list/search/${query}`)
-    }
-    return (
-        <Form inline>
-            <Form.Control
-                placeholder="Search"
-                onChange={handleQueryChange}/>
-            <Button type="submit" onClick={handleSearchClick}>
-                Search
-            </Button>
-        </Form>
-    )
-}
+
 const CustomNavbar = ({user}) => {
 
     if(user){
