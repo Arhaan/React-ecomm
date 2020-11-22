@@ -2,7 +2,7 @@ import './App.css';
 import {React, useContext, createContext, useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./components/home";
-import { Route, Switch, Redirect, useLocation, Link} from "react-router-dom";
+import {Route, Switch, Redirect, useLocation, Link, useHistory} from "react-router-dom";
 import Navbar from "react-bootstrap/cjs/Navbar";
 import LoginForm from "./components/Login";
 import Logout from "./components/Logout";
@@ -11,13 +11,40 @@ import Container from "react-bootstrap/cjs/Container";
 import OrdersView from "./components/Orders";
 import ProfileView from "./components/ProfileView";
 import Nav from "react-bootstrap/cjs/Nav";
+import {Form} from "react-bootstrap";
+import Button from "react-bootstrap/cjs/Button";
+
+const SearchBar = () => {
+    const history = useHistory()
+    const [query, setQuery] = useState()
+    const handleQueryChange = (event) => {
+        setQuery(event.target.value)
+    }
+    const handleSearchClick = (event) => {
+        event.preventDefault()
+        history.push(`/home/list/search/${query}`)
+    }
+    return (
+        <Form inline>
+            <Form.Control
+                placeholder="Search"
+                onChange={handleQueryChange}/>
+            <Button type="submit" onClick={handleSearchClick}>
+                Search
+            </Button>
+        </Form>
+    )
+}
 const CustomNavbar = ({user}) => {
 
     if(user){
         return(
             <Navbar>
-                <Nav className={"mr-auto"}>
-                    <Nav.Link><Navbar.Brand><Link to={"/home"}>Ecommerce</Link></Navbar.Brand></Nav.Link>
+                <Nav className>
+                    <Navbar.Brand><Link to={"/home/list"}>Ecommerce</Link></Navbar.Brand>
+                </Nav>
+                <Nav className={"justify-content-center mr-auto"}>
+                    <SearchBar/>
                 </Nav>
                 <Nav className={"justify-content-end"}>
                     <Nav.Link><Navbar.Text><Link to="/profile">{user}</Link></Navbar.Text></Nav.Link>
