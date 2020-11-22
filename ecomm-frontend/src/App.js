@@ -43,8 +43,8 @@ function App() {
                 <Route path="/profile"><ProfileView/></Route>
                 <Route path="/"><Home/></Route>
             </Switch>
-            <Footer/>
             </Container>
+            <Footer/>
         </div>
 
     )
