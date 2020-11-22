@@ -9,7 +9,7 @@ const ProductList = ({products})=>{
     const {url, path} = useRouteMatch();
     let query = useParams()["query"] || ""
 
-    const category = useParams()["category"]
+    const category = useParams()["category"]||"ALL"
     //console.log(`Category: ${category}`)
     //console.log(category)
     let productsToShow = products

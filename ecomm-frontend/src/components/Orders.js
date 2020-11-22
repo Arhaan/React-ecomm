@@ -15,7 +15,6 @@ const getStatusString = (code) => {
     }
 }
 const OrderCard = ({order}) => {
-    console.log(order.product.title)
     return(
         <div>
 
@@ -47,6 +46,7 @@ const OrdersView = () => {
             }, [token])
     return (
         <div>
+
             <h1>Your Orders</h1>
             {orders.map(order => <OrderCard key={order.id} order={order}/>)}
         </div>
